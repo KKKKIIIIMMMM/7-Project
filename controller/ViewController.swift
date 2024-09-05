@@ -7,298 +7,55 @@
 import UIKit
 import SnapKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController { // 클래스의 이름은 뷰컨트롤이고 타입은 유아이뷰 컨트롤입니다.
     
+    let button = UIButton()// 상수의 이름은 버튼이고 할당값은 유아이버튼의 객체 입니다.
+    let Title = UILabel() // 상수의 이름은 타이틀이고 할당값은 유아이레이블의 객체 입니다.
+    let Memotext = UITextView() // 상수의 이름은 모메노트이고 할당값은 유아이텍스트뷰의 객체 입니다.
     
-    
-    
-    override func viewDidLoad() {
+    override func viewDidLoad() { // 함수의 이름은 뷰디드로드이고 빈파라미터의 반환타입은 없습니다.
         super.viewDidLoad()
-    }
-}
-
-
-
-class firstview: UIView {
-    
-    let button = UIButton()
-    let nametext = UITextField()
-    let sentencetext = UITextField()
-    
-    
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        view.addSubview(button)
-        view.addSubview(nametext)
-        view.addSubview(sentencetext)
+        view.addSubview(button) // 뷰의 에디디서브뷰함수를 파라미터의 버튼을입력해서 호출합니다.
+        view.addSubview(Memotext) // 뷰의 에디디서브뷰함수를 파라미터의 메모텍스트입력해서 호출합니다.
+        view.addSubview(Title) // 뷰의 에디디서브뷰함수를 파라미터의 타이틀입력해서 호출합니다.
         
-        button.setTitle("완료", for: .normal)
-        button.setTitleColor(UIColor.blue, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.setTitle("완료", for: .normal) // 버튼의 setTitle 함수를 호출합니다.
+        button.setTitleColor(UIColor.gray, for: .normal) // 버튼의 setTitleColor 함수를 호출합니다.
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20) // 버튼의 타이틀레이블옵셔널의 폰트 할당값은 유아이폰트의 볼드시스템의 파라미터에 오프사이즈는 20 입니다.
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside) // 버튼의 에디디타켓힘수를 호출합니다.
         
         button.snp.makeConstraints{ make in
             make.top.equalToSuperview().inset(50)
-            make.trailing.equalToSuperview().inset(50)
+            make.trailing.equalToSuperview().inset(25)
+            make.width.equalTo(50)
+            make.height.equalTo(50)
             
         }
         
-        nametext.placeholder = "제목"
-        nametext.textColor = UIColor.blue
-        nametext.font = UIFont.systemFont(ofSize: 20)
-        nametext.textAlignment = .left
+        Title.text = "메모" // 타이틀의 텍스트 할당값은 메모 입니다.
+        Title.textColor = UIColor.gray // 타이틀의 텍스트색깔 할당값은 유아아이색깔의 그레이입니다.
+        Title.font = UIFont.systemFont(ofSize: 20) // 타이틀의 폰트 할당값은 유아이폰트의 시스템폰트 파라미터안에 오프사이즈 20입니다.
         
-        nametext.snp.makeConstraints{ make in
+        Title.snp.makeConstraints{ make in
             make.top.equalToSuperview().inset(50)
             make.leading.equalToSuperview().inset(25)
-            make.trailing.equalToSuperview().inset(25)
+            make.width.equalTo(50)
+            make.height.equalTo(50)
         }
         
-        nametext.placeholder = "메모"
-        nametext.textColor = UIColor.blue
-        nametext.font = UIFont.systemFont(ofSize: 20)
-        nametext.textAlignment = .left
+        Memotext.font = UIFont.systemFont(ofSize: 20) // 메모텍스트의 폰트 할당값은 유아이폰트의 시스템폰트 파라미터안에 오프사이즈 20입니다.
+        Memotext.textColor = UIColor.gray // 메모노트의 텍스트색깔 할당값은 유아색깔의 그레이입니다.
+        Memotext.textAlignment = .left // 메모노트의 textAlignment의 할당값의 왼쪽입니다.
+        Memotext.backgroundColor = UIColor.white // 메모노트의 backgroundColor의 할당값은 유아이색깔의 흰색입니다.
         
-        nametext.snp.makeConstraints{ make in
-            make.top.equalTo(nametext.snp.bottom).inset(50)
+        Memotext.snp.makeConstraints{ make in
+            make.top.equalTo(button.snp.bottom).inset(-25)
             make.leading.equalToSuperview().inset(25)
             make.trailing.equalToSuperview().inset(25)
+            make.height.equalTo(600)
         }
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    @objc func buttonTapped() { // 오브젝트씨의 함수이름은 버튼탭이고 빈파라미터 반환타입은 없습니다.
+        print(Memotext.text) // 문장을 출력해서 파라미터의 메모텍스트의 텍스트가 있습니다.
     }
 }
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//import UIKit
-//
-//class mainview: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
-//    
-//    private let topname: UILabel = {
-//        let topname = UILabel()
-//        topname.textColor = .mainGreen
-//        topname.textAlignment = .center
-//        topname.font = UIFont.systemFont(ofSize: 16, weight: .light)
-//        return topname
-//    }()
-//    
-//    private let folder: UIButton = {
-//        let folder = UIButton(type: .system)
-//        folder.setTitle("폴더", for: .normal)
-//        folder.addTarget(self, action: #selector(folderButtonTapped), for: .touchDown)
-//        folder.translatesAutoresizingMaskIntoConstraints = false
-//        return folder
-//    }()
-//    
-//    private let search: UISearchBar = {
-//        let search = UISearchBar()
-//        search.placeholder = "검색어 입력"
-//        search.showsCancelButton = true
-//        search.barStyle = .default
-//        search.delete = self
-//        return search
-//    }()
-//    
-//    private let tableView: UITableView = {
-//        let tableView = UITableView()
-//        tableView.separatorStyle = .none
-//        tableView.register(mainviewTableViewCell.self, forCellReuseIdentifier: "mainviewTableViewCell")
-//        return tableView
-//    }()
-//    
-//    private let Write: UIButton = {
-//        let write = UIButton(type: .system)
-//        write.setTitle("작성하기", for: .normal)
-//        write.addTarget(self, action: #selector(WriteButtonTapped), for: .touchDown)
-//        write.translatesAutoresizingMaskIntoConstraints = false
-//        return write
-//    }()
-//    
-//    private let arrow: UIButton = {
-//        let arrow = UIButton(type: .system)
-//        arrow.setTitle("화살표", for: .normal)
-//        arrow.addTarget(self, action: #selector(arrowButtonTapped), for: .touchDown)
-//        arrow.translatesAutoresizingMaskIntoConstraints = false
-//        return write
-//    }()
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        tableView.dataSource = self
-//        configureUI()
-//        
-//        let pickerView = UIPickerView()
-//        pickerView.frame = CGRect(x: 0, y: 100, width: self.view.frame.width, height: 200)
-//        pickerView.dataSource = self
-//        pickerView.delegate = self
-//        self.view.addSubview(pickerView)
-//        
-//    }
-//    
-//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//        return 1 // 구성 요소(열) 수
-//    }
-//    
-//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        return 10 // 행(옵션) 수
-//    }
-//    
-//    // UIPickerViewDelegate 메서드 구현
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return "Option \(row + 1)"
-//    }
-//    
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        print("Selected Option: \(row + 1)")
-//    }
-//    
-//    private func configureUI() {
-//        view.backgroundColor = .white
-//        [
-//            topname,
-//            folder,
-//            search,
-//            tableView,
-//            write,
-//            
-//        ].forEach { view.addSubview($0) }
-//        
-//        folder.snp.makeConstraints {
-//            $0.top.equalTo(collectionView.snp.bottom)
-//            $0.leading.trailing.equalToSuperview().inset(16)
-//            $0.height.equalTo(300)
-//            $0.bottom.equalTo(view.safeAreaLayoutGuide)
-//        }
-//        search.snp.makeConstraints {
-//            $0.top.equalTo(view.safeAreaLayoutGuide)
-//            $0.leading.equalTo(30)
-//        }
-//        tableView.snp.makeConstraints {
-//            $0.top.equalTo(collectionView.snp.bottom)
-//            $0.leading.trailing.equalToSuperview().inset(16)
-//            $0.height.equalTo(300)
-//            $0.bottom.equalTo(view.safeAreaLayoutGuide)
-//        }
-//        Write.snp.makeConstraints {
-//            $0.top.equalTo(collectionView.snp.bottom)
-//            $0.leading.trailing.equalToSuperview().inset(16)
-//            $0.height.equalTo(300)
-//            $0.bottom.equalTo(view.safeAreaLayoutGuide)
-//        }
-//        topname.snp.makeConstraints {
-//            $0.top.equalTo(collectionView.snp.bottom)
-//            $0.leading.trailing.equalToSuperview().inset(16)
-//            $0.height.equalTo(300)
-//            $0.bottom.equalTo(view.safeAreaLayoutGuide)
-//        }
-//        arrow.snp.makeConstraints {
-//            $0.top.equalTo(collectionView.snp.bottom)
-//            $0.leading.trailing.equalToSuperview().inset(16)
-//            $0.height.equalTo(300)
-//            $0.bottom.equalTo(view.safeAreaLayoutGuide)
-//        }
-//    }
-//}
-//
-//extension mainview: UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 20
-//    }
-//    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "mainTableViewCell", for: indexPath) as! WeatherTableViewCell
-//        
-//        return cell
-//    }
-//}
