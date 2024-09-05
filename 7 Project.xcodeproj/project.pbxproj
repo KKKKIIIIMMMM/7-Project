@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3CA378302C8859B100BF0BCA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3CA3782F2C8859B100BF0BCA /* SnapKit */; };
+		3C4C4FEF2C8989A00028DC27 /* view.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4C4FEE2C8989A00028DC27 /* view.swift */; };
+		3C4C4FF12C898C4E0028DC27 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3C4C4FF02C898C4E0028DC27 /* SnapKit */; };
 		3CEDF1902C7705EB000A7C58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEDF18F2C7705EB000A7C58 /* AppDelegate.swift */; };
 		3CEDF1922C7705EB000A7C58 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEDF1912C7705EB000A7C58 /* SceneDelegate.swift */; };
 		3CEDF1942C7705EB000A7C58 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEDF1932C7705EB000A7C58 /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C4C4FEE2C8989A00028DC27 /* view.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = view.swift; sourceTree = "<group>"; };
 		3CEDF18C2C7705EB000A7C58 /* 7 Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "7 Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CEDF18F2C7705EB000A7C58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3CEDF1912C7705EB000A7C58 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -32,7 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CA378302C8859B100BF0BCA /* SnapKit in Frameworks */,
+				3C4C4FF12C898C4E0028DC27 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				3CEDF1932C7705EB000A7C58 /* ViewController.swift */,
+				3C4C4FEE2C8989A00028DC27 /* view.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -94,7 +97,7 @@
 			);
 			name = "7 Project";
 			packageProductDependencies = (
-				3CA3782F2C8859B100BF0BCA /* SnapKit */,
+				3C4C4FF02C898C4E0028DC27 /* SnapKit */,
 			);
 			productName = "7 Project";
 			productReference = 3CEDF18C2C7705EB000A7C58 /* 7 Project.app */;
@@ -154,6 +157,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C4C4FEF2C8989A00028DC27 /* view.swift in Sources */,
 				3CEDF1942C7705EB000A7C58 /* ViewController.swift in Sources */,
 				3CEDF1902C7705EB000A7C58 /* AppDelegate.swift in Sources */,
 				3CEDF1922C7705EB000A7C58 /* SceneDelegate.swift in Sources */,
@@ -392,7 +396,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3CA3782F2C8859B100BF0BCA /* SnapKit */ = {
+		3C4C4FF02C898C4E0028DC27 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3CA3782E2C8859B100BF0BCA /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
