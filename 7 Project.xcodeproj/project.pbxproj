@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1BE9430B2C8E88EA008875B6 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE9430A2C8E88EA008875B6 /* CoreDataManager.swift */; };
 		3C4C4FEF2C8989A00028DC27 /* view.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4C4FEE2C8989A00028DC27 /* view.swift */; };
 		3C4C4FF12C898C4E0028DC27 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3C4C4FF02C898C4E0028DC27 /* SnapKit */; };
+		3C8329B62C8B17EC00DB875D /* Entity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8329B42C8B17EC00DB875D /* Entity+CoreDataClass.swift */; };
+		3C8329B72C8B17EC00DB875D /* Entity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8329B52C8B17EC00DB875D /* Entity+CoreDataProperties.swift */; };
+		3C83C94C2C9BBDD500C8DE8F /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3C83C94A2C9BBDD500C8DE8F /* Model.xcdatamodeld */; };
 		3CEDF1902C7705EB000A7C58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEDF18F2C7705EB000A7C58 /* AppDelegate.swift */; };
 		3CEDF1922C7705EB000A7C58 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEDF1912C7705EB000A7C58 /* SceneDelegate.swift */; };
 		3CEDF1942C7705EB000A7C58 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEDF1932C7705EB000A7C58 /* ViewController.swift */; };
@@ -18,7 +22,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1BE9430A2C8E88EA008875B6 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		3C4C4FEE2C8989A00028DC27 /* view.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = view.swift; sourceTree = "<group>"; };
+		3C8329B42C8B17EC00DB875D /* Entity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		3C8329B52C8B17EC00DB875D /* Entity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Entity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3C83C94B2C9BBDD500C8DE8F /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		3CEDF18C2C7705EB000A7C58 /* 7 Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "7 Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CEDF18F2C7705EB000A7C58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3CEDF1912C7705EB000A7C58 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,6 +52,9 @@
 		3CEDF1832C7705EB000A7C58 = {
 			isa = PBXGroup;
 			children = (
+				3C83C94A2C9BBDD500C8DE8F /* Model.xcdatamodeld */,
+				3C8329B42C8B17EC00DB875D /* Entity+CoreDataClass.swift */,
+				3C8329B52C8B17EC00DB875D /* Entity+CoreDataProperties.swift */,
 				3CEDF1A32C77227C000A7C58 /* controller */,
 				3CEDF18E2C7705EB000A7C58 /* 7 Project */,
 				3CEDF18D2C7705EB000A7C58 /* Products */,
@@ -76,6 +87,7 @@
 			children = (
 				3CEDF1932C7705EB000A7C58 /* ViewController.swift */,
 				3C4C4FEE2C8989A00028DC27 /* view.swift */,
+				1BE9430A2C8E88EA008875B6 /* CoreDataManager.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -160,6 +172,10 @@
 				3C4C4FEF2C8989A00028DC27 /* view.swift in Sources */,
 				3CEDF1942C7705EB000A7C58 /* ViewController.swift in Sources */,
 				3CEDF1902C7705EB000A7C58 /* AppDelegate.swift in Sources */,
+				3C8329B62C8B17EC00DB875D /* Entity+CoreDataClass.swift in Sources */,
+				3C83C94C2C9BBDD500C8DE8F /* Model.xcdatamodeld in Sources */,
+				3C8329B72C8B17EC00DB875D /* Entity+CoreDataProperties.swift in Sources */,
+				1BE9430B2C8E88EA008875B6 /* CoreDataManager.swift in Sources */,
 				3CEDF1922C7705EB000A7C58 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -402,6 +418,20 @@
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		3C83C94A2C9BBDD500C8DE8F /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3C83C94B2C9BBDD500C8DE8F /* Model.xcdatamodel */,
+			);
+			currentVersion = 3C83C94B2C9BBDD500C8DE8F /* Model.xcdatamodel */;
+			name = Model.xcdatamodeld;
+			path = "/Users/kimdongjun/Desktop/7 Project/Model.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3CEDF1842C7705EB000A7C58 /* Project object */;
 }

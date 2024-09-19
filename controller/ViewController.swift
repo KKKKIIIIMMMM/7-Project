@@ -4,8 +4,15 @@
 //
 //  Created by 김동준 on 8/22/24.
 
+//
+//  ViewController.swift
+//  7 Project
+//
+//  Created by 김동준 on 8/22/24.
+
 import UIKit
 import SnapKit
+import CoreData
 
 class ViewController: UIViewController { // 클래스의 이름은 뷰컨트롤이고 타입은 유아이뷰 컨트롤입니다.
     
@@ -13,15 +20,24 @@ class ViewController: UIViewController { // 클래스의 이름은 뷰컨트롤�
     let titlelabel = UILabel() // 상수의 이름은 타이틀이고 할당값은 유아이레이블의 객체 입니다.
     let memotext = UITextView()// 상수의 이름은 모메노트이고 할당값은 유아이텍스트뷰의 객체 입니다.
     let textfield = UITextField()
+    let coreDataManager = CoreDataManager() // 번역 : 상수의 이름은 coreDataManager이고 할당값은 CoreDataManager에 빈파라미터입니다.
+    var onDismiss: (() -> Void)?
+    var ischange : Bool = false // 초기값
+    var entity: Entity? // 수정할 메모.
+    // 만약에 entity 변수가 nil이 아니면 안에있는 name값은 제목에 textfield에 memo값은 textview에 나오게 해주세요.
     
     override func viewDidLoad() { // 함수의 이름은 뷰디드로드이고 빈파라미터의 반환타입은 없습니다.
         super.viewDidLoad()
+        //                updateNavigationBarButton()
+        
+        
         view.addSubview(button) // 뷰의 에디디서브뷰함수를 파라미터의 버튼을입력해서 호출합니다.
         view.addSubview(titlelabel)// 뷰의 에디디서브뷰함수를 파라미터의 타이틀입력해서 호출합니다.
         view.addSubview(textfield)
         view.addSubview(memotext) // 뷰의 에디디서브뷰함수를 파라미터의 메모텍스트입력해서 호출합니다.
+        view.backgroundColor = .white
         
-        button.setTitle("완료", for: .normal) // 버튼의 setTitle 함수를 호출합니다.
+        button.setTitle("수정", for: .normal) // 버튼의 setTitle 함수를 호출합니다.
         button.setTitleColor(UIColor.gray, for: .normal) // 버튼의 setTitleColor 함수를 호출합니다.
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20) // 버튼의 타이틀레이블옵셔널의 폰트 할당값은 유아이폰트의 볼드시스템의 파라미터에 오프사이즈는 20 입니다.
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside) // 버튼의 에디디타켓힘수를 호출합니다.
@@ -65,15 +81,55 @@ class ViewController: UIViewController { // 클래스의 이름은 뷰컨트롤�
         memotext.backgroundColor = UIColor.white // 메모노트의 backgroundColor의 할당값은 유아이색깔의 흰색입니다.
         memotext.layer.borderColor = UIColor.gray.cgColor
         memotext.layer.borderWidth = 0.5
+        
         memotext.snp.makeConstraints{ make in
             make.top.equalTo(textfield.snp.bottom).inset(-50)
             make.leading.equalToSuperview().inset(25)
             make.trailing.equalToSuperview().inset(25)
             make.height.equalTo(400)
         }
+        
+        // 09.12 저녁 : 여기 공부해 보세요.
+        if ischange == true {
+            button.setTitle("수정", for: .normal)
+        } else {
+            button.setTitle("완료", for: .normal)
+        }
+        
+        if let entity = entity {
+            textfield.text = entity.name
+            memotext.text = entity.memo
+            
+            
+        }
+        
+        // 09.12 저녁 숙제 - 1
+        // 만약에 entity 변수가 nil이 아니면 안에있는 name값은 제목에 textfield에 memo값은 textview에 나오게 해주세요.
+        // 코딩 시작
+    
+        // 09.12 저녁 숙제 - 2
+        // 브레이크포인트를 걸어서 한줄씩 코드가 어떻게 동작하는지 연습해보세요.
+        // 한줄씩 넘기는건 F6
+        // 다음 브레이크 포인트로 넘기기
+        
     }
-    @objc func buttonTapped() { // 오브젝트씨의 함수이름은 버튼탭이고 빈파라미터 반환타입은 없습니다.
-        print(memotext.text)// 문장을 출력해서 파라미터의 메모텍스트의 텍스트가 있습니다.
-        print(textfield.text)
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.onDismiss?()
+    }
+    
+    //@objc func buttonTapped()
+    // tutor : 해당 함수는 언제 호출(사용)이 되나요?
+    // 동준님 : 완료번튼을 클릭했을경우 호출됩니다.
+    @objc func buttonTapped() {// 오브젝트씨의 함수이름은 버튼탭이고 빈파라미터 반환타입은 없습니다.
+        self.dismiss(animated: false, completion: nil)
+        
+        coreDataManager.saveMemo(title: textfield.text!, contents: memotext.text! )// 번역 : coreDataManager의 saveMemo 함수를 호출합니다.
+        let memoList = coreDataManager.loadMemo() // 번역 : 상수의 이름은 memoList 할당값은 coreDataManager의 loadMemo에 빈파라미터입니다.
+        
+        for memoList in memoList {
+            print(memoList.name)
+            
+        }
     }
 }

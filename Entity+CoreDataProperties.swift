@@ -2,7 +2,7 @@
 //  Entity+CoreDataProperties.swift
 //  7 Project
 //
-//  Created by 변창원 on 9/13/24.
+//  Created by 김동준 on 9/6/24.
 //
 //
 
@@ -16,8 +16,8 @@ extension Entity {
         return NSFetchRequest<Entity>(entityName: "Entity")
     }
 
-    @NSManaged public var memo: String?
     @NSManaged public var name: String?
+    @NSManaged public var memo: String?
     @NSManaged public var id: UUID?
 
 }
