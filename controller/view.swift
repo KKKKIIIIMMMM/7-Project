@@ -10,7 +10,7 @@ import SnapKit
 /**
  */
 // 클래스의 이름은 view이고 타입은 UIViewController,UITableViewDelegate,UITableViewDataSource 스트링입니다.
-class view: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class view: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     let folder = UIButton() // 상수의 이름은 folder 할당값은 유아이버튼 객체 입니다.
     let search = UISearchBar() // 상수의 이름은 search 할당값은 유아이서치바 객체 입니다.
@@ -19,12 +19,17 @@ class view: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let cdm = CoreDataManager() // 상수의 이름은 cdm이고 할당값은 CoreDataManager에 객체입니다.
     var memorist = [Entity]()
     
+    var items = [String]()
+    var filteredItems: [String] = []
+    var isFiltering = false
     
     
     func reloadData() {
         memorist = cdm.loadMemo()
         cell.reloadData()
     }
+    
+    
     
     // 메모리스트 변수를 만들고 할당값은 Entity배열을 만듭니다.
     // tutor : 저장한 메모들이 보여지는 화면입니다.
@@ -35,6 +40,7 @@ class view: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewDidLoad()
         cell.delegate = self
         cell.dataSource = self
+        search.delegate = self
         view.addSubview(folder) // 뷰의 에디디서브뷰함수를 파라미터의 folder를 호출합니다.
         view.addSubview(search) // 뷰의 에디디서브뷰함수를 파라미터의 search를 호출합니다.
         view.addSubview(cell)   // 뷰의 에디디서브뷰함수를 파라미터의 cell를 호출합니다.
@@ -111,7 +117,7 @@ class view: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         
     }
-    
+    // items,filteredItems,isFiltering
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memorist.count
     }
@@ -119,9 +125,35 @@ class view: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = "\(memorist[indexPath.row].name!)"
-        
+//        cell.textLabel?.text = isFiltering ? filteredItems[indexPath.row] : items[indexPath.row]
         return cell
     }
+    
+    // UISearchBarDelegate 함수: 검색 텍스트 변경 시 호출
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            isFiltering = false  // 검색어가 없을 경우 필터링하지 않음
+        } else {
+            isFiltering = true   // 검색어가 있을 경우 필터링
+            filteredItems = items.filter { $0.lowercased().contains(searchText.lowercased()) }
+        }
+        cell.reloadData()  // 테이블 뷰 갱신
+    }
+    
+    // UISearchBarDelegate 함수: 검색 버튼(키보드의 "Search")을 눌렀을 때 호출
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()  // 키보드 내리기
+    }
+    
+    // UISearchBarDelegate 함수: 취소 버튼 클릭 시 호출
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        isFiltering = false
+        cell.reloadData()
+        searchBar.resignFirstResponder()  // 키보드 내리기
+    }
+    
+    
     
     // 셀을 클릭했을떄 데이터에 저장된 값이 불러옵니다.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -131,7 +163,7 @@ class view: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         tableView.deselectRow(at: indexPath, animated: true)
         let viewcontroller = ViewController() // 상수의 이름은 viewcontroller의 할당값은 ViewController 객체입니다.
-
+        
         viewcontroller.onDismiss = {
             self.reloadData()
         }

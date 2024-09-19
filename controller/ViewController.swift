@@ -103,15 +103,6 @@ class ViewController: UIViewController { // 클래스의 이름은 뷰컨트롤�
             
         }
         
-        // 09.12 저녁 숙제 - 1
-        // 만약에 entity 변수가 nil이 아니면 안에있는 name값은 제목에 textfield에 memo값은 textview에 나오게 해주세요.
-        // 코딩 시작
-    
-        // 09.12 저녁 숙제 - 2
-        // 브레이크포인트를 걸어서 한줄씩 코드가 어떻게 동작하는지 연습해보세요.
-        // 한줄씩 넘기는건 F6
-        // 다음 브레이크 포인트로 넘기기
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -122,14 +113,13 @@ class ViewController: UIViewController { // 클래스의 이름은 뷰컨트롤�
     // tutor : 해당 함수는 언제 호출(사용)이 되나요?
     // 동준님 : 완료번튼을 클릭했을경우 호출됩니다.
     @objc func buttonTapped() {// 오브젝트씨의 함수이름은 버튼탭이고 빈파라미터 반환타입은 없습니다.
-        self.dismiss(animated: false, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         
-        coreDataManager.saveMemo(title: textfield.text!, contents: memotext.text! )// 번역 : coreDataManager의 saveMemo 함수를 호출합니다.
-        let memoList = coreDataManager.loadMemo() // 번역 : 상수의 이름은 memoList 할당값은 coreDataManager의 loadMemo에 빈파라미터입니다.
-        
-        for memoList in memoList {
-            print(memoList.name)
-            
+        if ischange == false {
+            coreDataManager.saveMemo(title: textfield.text!, contents: memotext.text! )
+        } else {
+            coreDataManager.uploadMemo(entity: entity, title: textfield.text!, sentence: memotext.text!)
         }
+            
     }
 }
