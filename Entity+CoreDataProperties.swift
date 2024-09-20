@@ -18,7 +18,6 @@ extension Entity {
 
     @NSManaged public var memo: String?
     @NSManaged public var name: String?
-    @NSManaged public var memo: String?
     @NSManaged public var id: UUID?
 
 }

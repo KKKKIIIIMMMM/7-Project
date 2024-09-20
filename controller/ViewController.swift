@@ -14,15 +14,15 @@ import UIKit
 import SnapKit
 import CoreData
 
-class ViewController: UIViewController { // 클래스의 이름은 뷰컨트롤이고 타입은 유아이뷰 컨트롤입니다.
+class ViewController: UIViewController {
     
-    let button = UIButton()// 상수의 이름은 버튼이고 할당값은 유아이버튼의 객체 입니다.
-    let titlelabel = UILabel() // 상수의 이름은 타이틀이고 할당값은 유아이레이블의 객체 입니다.
-    let memotext = UITextView()// 상수의 이름은 모메노트이고 할당값은 유아이텍스트뷰의 객체 입니다.
+    let button = UIButton()
+    let titlelabel = UILabel()
+    let memotext = UITextView()
     let textfield = UITextField()
-    let coreDataManager = CoreDataManager() // 번역 : 상수의 이름은 coreDataManager이고 할당값은 CoreDataManager에 빈파라미터입니다.
+    let coreDataManager = CoreDataManager()
     var onDismiss: (() -> Void)?
-    var ischange : Bool = false // 초기값
+    var ischange : Bool = false
     var entity: Entity? // 수정할 메모.
     // 만약에 entity 변수가 nil이 아니면 안에있는 name값은 제목에 textfield에 memo값은 textview에 나오게 해주세요.
     
