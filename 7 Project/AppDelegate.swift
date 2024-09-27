@@ -72,7 +72,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//extension UserDefaults {
+//    func colorForKey(key: String) -> UIColor? {
+//        var color: UIColor?
+//        if let colorData = data(forKey: key) {
+//            color = NSKeyedUnarchiver.unarchiveObject(with: colorData) as? UIColor
+//        }
+//        return color
+//    }
+//    
+//    func setColor(color: UIColor?, forKey key: String) {
+//        var colorData: NSData?
+//        if let color = color {
+//            colorData = NSKeyedArchiver.archivedData(withRootObject: color) as NSData?
+//        }
+//        set(colorData, forKey: key)
+//    }
+//}
 

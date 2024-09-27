@@ -19,6 +19,10 @@ extension Entity {
     @NSManaged public var memo: String?
     @NSManaged public var name: String?
     @NSManaged public var id: UUID?
+    @NSManaged public var color: String?
+    @NSManaged public var check: String?
+    @NSManaged public var time: Int16
+    @NSManaged public var sidescreen: String?
 
 }
 
