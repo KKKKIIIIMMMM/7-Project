@@ -23,6 +23,8 @@ extension Entity {
     @NSManaged public var check: String?
     @NSManaged public var time: Int16
     @NSManaged public var sidescreen: String?
+    @NSManaged public var restoration: Bool
+
 
 }
 

@@ -11,7 +11,29 @@ import UIKit
 
 class CoreDataManager {
     
-    // 메모의 제목과 메모의 내용을 코어데이터에 저장하는 함수
+    func removeMemo(entity: Entity?) {
+           guard let entity else { return }
+           guard let id = entity.id else { return }
+           guard let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else { return }
+           let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Entity")
+           fetchRequest.predicate = NSPredicate(format: "id = %@", "\(id)")
+           do {
+               let removeObjects = try context.fetch(fetchRequest)
+               let objectToDelete = removeObjects[0] as! NSManagedObject
+               context.delete(objectToDelete)
+               do {
+                   try context.save()
+               } catch {
+                   print(error)
+               }
+           } catch {
+               print(error)
+           }
+
+
+       }
+    
+    // 코어데이터에 저장하는 함수
     func saveMemo(title: String, contents: String, color: UIColor?, sidescreen: String) { // 번역 : 함수의 이름은 saveMemo이고 파라미터의 title,contents에 타입은 스트링입니다.
         guard let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else { return }
         guard let entity = NSEntityDescription.entity(forEntityName: "Entity", in: context) else { return }
@@ -24,45 +46,43 @@ class CoreDataManager {
         memoObject.setValue(color.toHexStr(), forKey: "color")
         memoObject.setValue(Date().timeIntervalSince1970, forKey: "time")
         memoObject.setValue(sidescreen, forKey: "sidescreen")
+        memoObject.setValue(false, forKey: "restoration")
         try? context.save()
     }
     
     func checkMemo(entity: Entity?, check: String) {
-            guard let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else { return }
-            guard let entity else { return }
-            guard let uuid = entity.id else { return }
-
-            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Entity")
-            fetchRequest.predicate = NSPredicate(format: "id = %@", uuid.uuidString)
-
+        guard let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else { return }
+        guard let entity else { return }
+        guard let uuid = entity.id else { return }
+        
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Entity")
+        fetchRequest.predicate = NSPredicate(format: "id = %@", uuid.uuidString)
+        
+        do {
+            let fetchData = try context.fetch(fetchRequest)
+            guard let objectUpdate = fetchData.first as? NSManagedObject else { return }
+            objectUpdate.setValue(check, forKey: "check")
+            
             do {
-                let fetchData = try context.fetch(fetchRequest)
-                guard let objectUpdate = fetchData.first as? NSManagedObject else { return }
-                objectUpdate.setValue(check, forKey: "check")
-
-                do {
-                    try context.save()
-                } catch {
-                    print(error)
-                }
+                try context.save()
             } catch {
                 print(error)
             }
-            
+        } catch {
+            print(error)
         }
+        
+    }
     
-    // entity 는 수정될 메모
-    // title에는 새롭게 수정 될 제목이 들어올 예정
-    // sentence에는 새롭게 수정 될 메모의 문장이 들어올 예정
     func uploadMemo(entity: Entity?, title: String, sentence: String, color: UIColor?, sidescreen: String) {
         guard let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else { return }
         guard let entity else { return }
         guard let uuid = entity.id else { return }
         let color = color ?? .black
-
+        
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Entity")
         fetchRequest.predicate = NSPredicate(format: "id = %@", uuid.uuidString)
-
+        
         do {
             let fetchData = try context.fetch(fetchRequest)
             guard let objectUpdate = fetchData.first as? NSManagedObject else { return }
@@ -82,12 +102,11 @@ class CoreDataManager {
     }
     
     // 코어데이터에 저장되어 있는 메모정보들을 불러오는 함수
-    func loadMemo() -> [Entity] { // 번역 : 함수의 이름은 loadMemo에 빈파라미터이고 리턴의 배열은 Entity 입니다.
+    func loadMemo(restoration: Bool) -> [Entity] {
         guard let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else { return [] }
         
-        let memoList = try? context.fetch(Entity.fetchRequest()) // 번역 : 상수의 이름은 memoList이고 할당값은 try옵셔널에 context의fetch는 피라미터에 Entity의fetchRequest 입니다.
-                                                            // (try? context.fetch(Entity.fetchRequest())) 의 번역은 아래에!
-                                                                 // 코어데이터에서 Entity 데이터를 불러옵니다.
+        let memoList = try? context.fetch(Entity.fetchRequest())
+        
         guard var memoList = memoList else { return [] }
         memoList = memoList.map {
             if $0.color == nil {
@@ -96,19 +115,25 @@ class CoreDataManager {
             return $0
         }
         
+        memoList = memoList.filter({ entity in
+              entity.restoration == restoration
+            })
+        
         return memoList
     }
     
     func deleteMemo(entity: Entity?) {
-        guard let entity else { return }
-        guard let id = entity.id else { return }
         guard let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else { return }
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Entity")
-        fetchRequest.predicate = NSPredicate(format: "id = %@", "\(id)")
+        guard let entity else { return }
+        guard let uuid = entity.id else { return }
+        
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Entity")
+        fetchRequest.predicate = NSPredicate(format: "id = %@", uuid.uuidString)
+        
         do {
-            let removeObjects = try context.fetch(fetchRequest)
-            let objectToDelete = removeObjects[0] as! NSManagedObject
-            context.delete(objectToDelete)
+            let fetchData = try context.fetch(fetchRequest)
+            guard let objectUpdate = fetchData.first as? NSManagedObject else { return }
+            objectUpdate.setValue(true, forKey: "restoration")
             do {
                 try context.save()
             } catch {
@@ -117,10 +142,10 @@ class CoreDataManager {
         } catch {
             print(error)
         }
-
+        
+        
     }
 }
-
 
 extension UIColor {
     static func hexStringToUIColor(hex:String?) -> UIColor {
