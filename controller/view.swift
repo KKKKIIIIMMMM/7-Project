@@ -76,8 +76,6 @@ class view: UIViewController, UITableViewDelegate, UITableViewDataSource, UISear
         }
         
         cell.rowHeight = 50 //
-        cell.estimatedRowHeight = 0
-        cell.sectionFooterHeight = 0
         cell.separatorColor = UIColor.gray
         cell.allowsSelection = true
         cell.register(CustomTableViewCell.self, forCellReuseIdentifier: "CustomTableViewCell")
@@ -128,7 +126,7 @@ class view: UIViewController, UITableViewDelegate, UITableViewDataSource, UISear
     @objc func noitamrofni() {
         
         if information == false {
-            folder.setTitle("삭제", for: .normal)
+            folder.setTitle("목록삭제", for: .normal)
             information = true
             memorist = cdm.loadMemo(restoration: true)
             
@@ -177,13 +175,12 @@ class view: UIViewController, UITableViewDelegate, UITableViewDataSource, UISear
             cell.title.text = "\(filteredItems[indexPath.row].name!)"
             cell.title.textColor = UIColor.hexStringToUIColor(hex:filteredItems[indexPath.row].color )
             cell.update(Entity: filteredItems[indexPath.row])
-            cell.title.textColor = UIColor.gray
         }else{
             cell.entity = memorist[indexPath.row]
             cell.title.text = "\(memorist[indexPath.row].name!)"
             cell.title.textColor = UIColor.hexStringToUIColor(hex: memorist[indexPath.row].color )
             cell.update(Entity: memorist[indexPath.row])
-            cell.title.textColor = UIColor.gray
+            
         }
         return cell
     }

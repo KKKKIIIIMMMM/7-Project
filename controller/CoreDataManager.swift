@@ -34,7 +34,8 @@ class CoreDataManager {
        }
     
     // 코어데이터에 저장하는 함수
-    func saveMemo(title: String, contents: String, color: UIColor?, sidescreen: String) { // 번역 : 함수의 이름은 saveMemo이고 파라미터의 title,contents에 타입은 스트링입니다.
+    func saveMemo(title: String, contents: String, color: UIColor?, sidescreen: String) {
+        
         guard let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else { return }
         guard let entity = NSEntityDescription.entity(forEntityName: "Entity", in: context) else { return }
         let color = color ?? .black
@@ -98,7 +99,6 @@ class CoreDataManager {
         } catch {
             print(error)
         }
-        
     }
     
     // 코어데이터에 저장되어 있는 메모정보들을 불러오는 함수
